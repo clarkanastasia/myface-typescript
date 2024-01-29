@@ -6,7 +6,22 @@
 <ol>
     <% postList.results.forEach(function(post) {%>
         <li>
-            <%= post.message %> - <%= format(post.createdAt, "yyyy-MM-dd HH:mm:ss") %>
+            <h2><%= post.message %> </h2>
+            <p> <%= format(post.createdAt, "yyyy-MM-dd HH:mm:ss") %> </p>
+            <img src = <%= post.imageUrl %> alt = "picture illustrating blogpost" > 
+            <p> Posted by: <%= post.postedBy.name %> - <%= post.postedBy.username %> - <%= post.postedBy.email %></p>
+            <p> Liked by:  </p> 
+                <ol>
+                    <% post.likedBy.forEach((likedPost) =>{ %>
+                    <li><%= likedPost.name %> - <%= likedPost.username %> - <%= likedPost.email %></li>      
+                    <% }); %>
+                </ol>
+            <p>Disliked by: </p> 
+                <ol>
+                    <% post.dislikedBy.forEach((disliked)=>{ %>
+                    <li><%= disliked.name %> - <%= disliked.username %> - <%= disliked.email %> </li>
+                    <% }); %>
+                </ol> 
         </li>
     <% }); %>
 </ol>
