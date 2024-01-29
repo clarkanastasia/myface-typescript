@@ -2,7 +2,19 @@
 <%- include('_head') -%>
 <%- include('_header') -%>
 <body>
-<h1><%= name %></h1>
+    <h1><%= user.name %></h1>
+    <p> Email: <%= user.email %></p>
+    <p>Username: <%= user.username %></p>
+    <img src=<%= user.coverImageUrl %> alt="cover image">
+    <img src=<%= user.profileImageUrl %> alt="profile image"> 
+    <ol>
+        <% user.posts.forEach((post)=> { %>
+            <li>
+                <h2><%= post.message %> </h2>
+                <p> <%= format(post.createdAt, "yyyy-MM-dd HH:mm:ss") %> </p>
+            </li>
+        <% }) %>
+    </ol> 
 </body>
 <%- include('_footer') -%>
 </html>
