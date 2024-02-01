@@ -1,6 +1,25 @@
 <header>
-    <nav>
-        <a href="/posts">Posts</a>
-        <a href="/users">Users</a>
+    <nav class="navContainer">
+        <a class="myFace" href="/">MyFace</a>
+        <div class="linksContainer">
+            <a href="/users/1">Home</a>
+            <a href="/posts">Posts</a>
+            <a href="/users">Users</a>
+        </div>
+        <a class="newPost" href="/posts/create">+ New Post</a>
     </nav>
+
+    <nav class="navContainerMobile">
+        <button class="menuButton" id="menuButton">Menu</button>
+    </nav>
+
+    <div class="hidden" id="mobileMenu">
+        <a href="/">MyFace</a>
+        <div class="linksContainerMobile">
+            <a href="/users/1">Home</a>
+            <a href="/posts">Posts</a>
+            <a href="/users">Users</a>
+            <a href="/posts/create">+ New Post</a>
+        </div>
+    </div>
 </header>
