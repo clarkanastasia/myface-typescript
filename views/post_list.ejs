@@ -1,36 +1,55 @@
 <html lang="en-gb">
 <%- include('_head') -%>
 <%- include('_header') -%>
+
+<% let likeUsernameArray = [] %>
+<% let dislikeUsernameArray = [] %>
+
 <body>
-<h1>Posts</h1>
-<ol>
+<div class="flexContainer" id="flexContainer">
+    <div class="postButtonContainer">
+        <button id="backgroundButton">Change Color</button>
+    </div>
+    <h1 class="subtitle">Posts</h1>
+    <ol class="postsContainer">
     <% postList.results.forEach(function(post) {%>
-        <li>
-            <h2><%= post.message %> </h2>
-            <p> <%= format(post.createdAt, "yyyy-MM-dd HH:mm:ss") %> </p>
+        <li class="postContainer">
+            <div class="postInfo">
+                <h3><%= post.message %> </h3>
+                <p> <%= format(post.createdAt, "yyyy-MM-dd") %> </p>
+            </div>    
             <img src = <%= post.imageUrl %> alt = "picture illustrating blogpost" > 
-            <p> Posted by: <%= post.postedBy.name %> - <%= post.postedBy.username %> - <%= post.postedBy.email %></p>
-            <p> Liked by:  </p> 
-                <ol>
-                    <% post.likedBy.forEach((likedPost) =>{ %>
-                    <li><%= likedPost.name %> - <%= likedPost.username %> - <%= likedPost.email %></li>      
-                    <% }); %>
-                </ol>
-            <p>Disliked by: </p> 
-                <ol>
-                    <% post.dislikedBy.forEach((disliked)=>{ %>
-                    <li><%= disliked.name %> - <%= disliked.username %> - <%= disliked.email %> </li>
-                    <% }); %>
-                </ol> 
-            <form method="post" action="/posts/<%= post.id %>/like/">
-                <button type="submit">Like</button>
-            </form> 
-            <form method="post" action="/posts/<%= post.id %>/dislike/">
-                <button type="submit">Dislike</button>
-            </form> 
+            <div class="postInfo">
+                <p> Posted by: <%= post.postedBy.name %> - <%= post.postedBy.username %> - <%= post.postedBy.email %></p>
+            </div>  
+            <div class="postInfo">
+                <p> Liked by:  </p> 
+                <% post.likedBy.forEach((likedPost) =>{ %>
+                <% likeUsernameArray.push(" " + likedPost.username) %>     
+                <% }); %>
+                <p> <%= likeUsernameArray.join() %> </p> 
+            </div>    
+            <div class="postButtonContainer">
+                    <form method="post" action="/posts/<%= post.id %>/like/">
+                        <button class="postButton" type="submit">Like</button>
+                    </form> 
+            </div> 
+            <div class="postInfo">       
+                <p>Disliked by: </p> 
+                <% post.dislikedBy.forEach((dislikedPost)=>{ %>
+                <% dislikeUsernameArray.push(" " + dislikedPost.username) %>     
+                <% }); %>
+                <p> <%= dislikeUsernameArray.join() %> </p> 
+            </div>     
+            <div class="postButtonContainer">
+                <form method="post" action="/posts/<%= post.id %>/dislike/">
+                    <button class="postButton" type="submit">Dislike</button>
+                </form> 
+            </div>    
         </li>
     <% }); %>
-</ol>
+    </ol>
+</div>
 </body>
 <%- include('_footer') -%>
 </html>
